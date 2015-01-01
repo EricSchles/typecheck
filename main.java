@@ -4,7 +4,7 @@ class TypeChecker<T>{
 		System.out.println(input);
 	} 
 	
-	public static <T> String type(T generic){
+	public <T> String type(T generic){
 		if(generic instanceof Integer){
 			
 			return "<type Integer>";
@@ -20,13 +20,10 @@ class TypeChecker<T>{
 
 		else{
 			//yay reflection!
-			String class_name = generic.getClass().toString();
+			//String class_name = generic.getClass();
 			try{
-				print(class_name.contains("$"));
-				String[] parts = class_name.split("\\$"); 
-				print(parts[1]);
-				print(class_name);
-				Class<?> c = Class.forName( class_name );
+				print(generic);
+				Class<?> c = Class.forName( generic.getClass().toString() );
 				String result = "<types " + c.getFields() + " " + c.getDeclaredFields() + "in "+generic.getClass() +" >";
 				return result;
 			} catch(ClassNotFoundException e){
@@ -39,14 +36,14 @@ class TypeChecker<T>{
 
 }
 
+class hello{ int x; Boolean y;}
 
-class main{
+public class main{
 	public static <T> void print(T input){
 		System.out.println(input);
 	}
 	public static void main(String[] args){
-		class hello{ int x; Boolean y;}
-		hello x = new hello();
-		print(TypeChecker.type(x));
+		//TypeChecker t = new TypeChecker();
+		
 	}
 }
