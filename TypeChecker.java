@@ -1,3 +1,5 @@
+
+
 class TypeChecker<T>{
 	
 	public static <T> void print(T input){
@@ -13,8 +15,21 @@ class TypeChecker<T>{
 			
 			return "<type String>";
 		
-		} else{
-			return "unknown type";
+		} else if(generic instanceof Boolean){
+			return "<type Boolean>";
+		} else if(generic instanceof Double)
+			return "<type Double>";
+
+		else{
+			String class_name = generic.getClass().toString();
+			try{
+				Class<?> c = Class.forName( class_name );
+				String result = "<types " + c.getFields() + " " + c.getDeclaredFields() + "in "+generic.getClass() +" >";
+				return result;
+			} catch(ClassNotFoundException e){
+				return ""+e.getMessage();
+			}
+			 
 		}
 	}
 
