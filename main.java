@@ -22,6 +22,9 @@ class TypeChecker<T>{
 			//yay reflection!
 			String class_name = generic.getClass().toString();
 			try{
+				print(class_name.contains("$"));
+				String[] parts = class_name.split("\\$"); 
+				print(parts[1]);
 				print(class_name);
 				Class<?> c = Class.forName( class_name );
 				String result = "<types " + c.getFields() + " " + c.getDeclaredFields() + "in "+generic.getClass() +" >";
